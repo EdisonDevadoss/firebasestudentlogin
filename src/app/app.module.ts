@@ -6,6 +6,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { StudentProvider } from '../providers/student/student';
+import { HttpModule } from '@angular/http';
+
+import { AngularFireModule } from 'angularfire2'; 
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCTyPY5pNG-lj2d7MGbL4wAOkzy8xN7ohQ",
+  authDomain: "student-602b8.firebaseapp.com",
+  databaseURL: "https://student-602b8.firebaseio.com",
+  projectId: "student-602b8",
+  storageBucket: "",
+  messagingSenderId: "720749413852"
+}
 
 @NgModule({
   declarations: [
@@ -14,7 +28,10 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -24,7 +41,8 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    StudentProvider
   ]
 })
 export class AppModule {}
